@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>有趣的鼠标悬浮模糊效果</title>
+	<style>
+	html{
+		font-family: "Segoe UI",'Microsoft Yahei',Helvetica,Arial;
+	}
+	*,*::before,*::after{
+		box-sizing:border-box;
+	}
+	.wrapper{
+		position: relative;
+		width: 726px;
+		height: 440px;
+		margin:50px auto;
+	}
+	.wrapper .container{
+		position: absolute;
+	    padding: 40px;
+	    width: 100%;
+	    height: 100%;
+	    z-index: 1;
+	}
+	.wrapper .container .content{
+		position: relative;
+	    overflow: hidden;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		color: #fffffb;
+		display: flex;
+    	justify-content: center;
+    	align-items: center;
+    	flex-direction: column;
+    	/*-webkit-box-shadow: 0 0 30px 20px rgba(255, 255, 255,.46);*/
+    	opacity: 0;
+    	transition: opacity .5s;
+	}
+	.wrapper .container .content::before{
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 0;
+		top:50%;
+		left:0;
+		overflow: hidden;
+		border-left:3px solid #fffffb;
+		border-right:3px solid #fffffb;
+	    visibility: hidden;
+	    -webkit-transition: all .5s;
+	    transition: all .5s;
+	}
+	.wrapper .container .content::after{
+		content:"";
+		position: absolute;
+		width: 0;
+		height: 100%;
+		left:50%;
+		top:0;
+		overflow: hidden;
+		border-top:3px solid #fffffb;
+		border-bottom:3px solid #fffffb;
+		visibility: hidden;
+		-webkit-transition: all .5s;
+	    transition: all .5s;
+	}
+	.wrapper .streamer{
+		background-image:
+		-webkit-linear-gradient(left,#3498db,#f47920 10%,#d71345 20%,#f7acbc 30%,#ffd400 40%,#3498db 50%,
+		#f47920 60%,#d71345 70%,#f7acbc 80%,#ffd400 90%,#3498db);
+    	color: transparent;
+    	-webkit-background-clip: text;
+    	background-size: 200%;
+    	-webkit-animation: streamer 5s infinite linear;
+	}
+	.wrapper .breathe{
+		animation: breathe 5s infinite linear;
+		-webkitanimation: breathe 5s infinite linear;
+	}
+	.wrapper .slideIn{
+		opacity: 0;
+		transform:translate(0,20px);
+		-webkit-transform:translate(0,20px);
+		transition: all linear;
+		-webkit-transition: all .25s linear;
+	}
+	.wrapper .container .content h1{
+		margin-top:10px; 
+	}
+	.wrapper .container .content a{
+		font-size: 16px;
+    	color: #3498db;
+    	cursor: pointer;
+    	position: relative;
+    	z-index: 10;
+	}
+	.wrapper img{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	.wrapper:hover img{
+		filter:filter:blur(5px);
+		-webkit-filter:blur(5px);
+	}
+	.wrapper:hover .content{
+		opacity: 1;
+	}
+	.wrapper:hover .content::after{
+		visibility: visible;
+		width: 100%;
+		left:0;
+	}
+	.wrapper:hover .content::before{
+		visibility: visible;
+		height: 100%;
+		top:0;
+	}
+	
+	.wrapper:hover .slideIn{
+		opacity: 1;
+		-webkit-transform:translate(0,20px);
+		transform:translate(0);
+	}
+	@-webkit-keyframes streamer {
+		0% {
+	        background-position: 0 0
+	    }
+
+	    100% {
+	        background-position: -100% 0
+	    }
+	}
+	@-webkit-keyframes breathe {
+	    0% {
+	        color: #3498db
+	    }
+
+	    25% {
+	        color: #d71345
+	    }
+
+	    50% {
+	        color: #f7acbc
+	    }
+
+	    75% {
+	        color: #d71345
+	    }
+
+	    0% {
+	        color: #3498db
+	    }
+	}
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="content">
+				<h1 class="streamer slideIn">欢迎参加百度前端技术学院</h1>
+				<a class="breathe slideIn" href="http://ife.baidu.com/course/all">欢迎参加</a>
+			</div>
+		</div>
+		<img 
+		src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=826966854,2354474988&fm=21&gp=0.jpg" alt="image">
+	</div>
+</body>
+</html>
